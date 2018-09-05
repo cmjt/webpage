@@ -1,6 +1,0 @@
-#molly {
-  height: 256px;
-  width: 256px;
-background: 
-url('~/Desktop/mol.png') 0px 0px;
-}
