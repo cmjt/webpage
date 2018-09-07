@@ -1,0 +1,112 @@
+html {
+  box-sizing: border-box;
+}
+header{
+    font-family: Shadows Into Light, monospace;
+    font-size: 4vw;
+    text-align: center;
+}
+img {
+    max-width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    grid.area: img;
+    justify-self: center;
+}
+figcaption{
+    text-align: center;
+    font-size: 0.7vw;
+}
+.container {
+    font-size: 1.5em;
+    min-height: 300px;
+    width: 100%;
+    background: LightGray;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 10px;
+    grid-template-areas:
+    "content1 content2";
+}
+.content1 {
+    background: LightSkyBlue;
+    grid-area: content1;
+    jusify-self: center;
+    padding: 20px 40px 20px 40px;
+}
+.content2 {
+    background: PaleTurquoise;
+    grid-area: content2;
+    jusify-self: center;
+    padding: 20px 40px 20px 40px;
+}
+a {
+    color: #000;
+    text-decoration: none; 
+}
+a:hover {
+    color: #022f77;
+}
+
+*, 
+*:before, 
+*:after {
+  box-sizing: inherit;
+}
+
+figure {
+  margin: 0;
+}
+
+.absolute-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.fog {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.fog__container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.fog__img--first {
+    position: absolute;
+    height: 100vh;
+    width: 300vw;
+    background: url('https://res.cloudinary.com/dkr52htco/image/upload/v1536173269/fog-1.png') repeat-x;
+    background-size: contain;
+    background-position: center;
+    animation: fog 60s linear infinite;
+}
+
+.fog__img--second {
+    background: url('https://res.cloudinary.com/dkr52htco/image/upload/v1536173269/fog-2.png') repeat-x;
+    background-size: contain;
+    background-position: center;
+    animation: fog 40s linear infinite;
+}
+
+@keyframes fog {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-200vw, 0, 0); }
+}
