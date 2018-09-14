@@ -20,27 +20,33 @@ figcaption{
     font-size: 0.7vw;
 }
 .container {
-    font-size: 1.5em;
-    min-height: 300px;
+    font-size: 1em;
     width: 100%;
-    background: LightGray;
+    height: 100%;
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-gap: 10px;
+    grid-gap: 5px;
     grid-template-areas:
     "content1 content2";
 }
 .content1 {
-    background: LightSkyBlue;
     grid-area: content1;
     jusify-self: center;
     padding: 20px 40px 20px 40px;
 }
 .content2 {
-    background: PaleTurquoise;
     grid-area: content2;
     jusify-self: center;
     padding: 20px 40px 20px 40px;
+}
+th {
+    height: 50px;
+}
+table tr:nth-child(even) {
+    background-color: #eee;
+}
+table tr:nth-child(odd) {
+    background-color: #fff;
 }
 a {
     color: #000;
@@ -56,29 +62,14 @@ a:hover {
   box-sizing: inherit;
 }
 
-figure {
-  margin: 0;
-}
-
-.absolute-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  margin: 0;
-  height: 100%;
-  width: 100%;
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden;
-}
 
 .fog {
     position: relative;
-    height: 100vh;
+    height: 175vh;
     width: 100%;
     background-color: #000;
+    background-image: url('https://c.pxhere.com/photos/8c/b0/night_urban_dark_street_evening_dusk_scene_london-1335251.jpg!d');
+    background-size: cover;
     overflow: hidden;
 }
 
@@ -86,12 +77,11 @@ figure {
     position: absolute;
     height: 100%;
     width: 100%;
-    overflow: hidden;
 }
 
 .fog__img--first {
     position: absolute;
-    height: 100vh;
+    height: 175vh;
     width: 300vw;
     background: url('https://res.cloudinary.com/dkr52htco/image/upload/v1536173269/fog-1.png') repeat-x;
     background-size: contain;
