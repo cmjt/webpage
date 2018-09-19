@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- start of html page -->
+<html>
+  <body>
+    <head>
+      <link rel="stylesheet" type="text/css" href="survey.css">
+      <h1 id="title"> Statistics and R Course </h1>
+    </head>
+    <main id="main"> <!-- start of page's main content -->
+      <div>
+      <form id = "survey-form" class="survey-form" action="/submit_EO1"> <!-- starting form -->
+      <p id = "description", class="desc">
+	Expression of intrest for Statistics and R introductory course
+      <p><label for="name" id="name-label">Name</label>
+      <p><input id="name" type="text" placeholder="Name">
+      <p><label for="email" id="email-label">Email</label>
+      <p><input id="email" type="email" required placeholder="Enter a vaild email address">
+      <p><label for="number" id="number-label">Number</label>
+      <p><input id="number" type="number" required min="0" max= "9999999999" placeholder="Enter a valid phone number">
+      <p><button type="submit">this button submits the form</button>
+
+
+      </form> <!-- end form -->
+      </div> <!-- end of container class -->
+    </main>  <!-- end of page's main content -->
+    <footer>&copy; <a id="github link" target="_blank" href="https://github.com/cmjt">cmjt</a></footer> <!-- footer -->
+  </body>  <!-- end of page' body -->
+</html>
