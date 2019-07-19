@@ -1,8 +1,8 @@
 ---
-date: "2019-07-12"
-diagram: true
-math: true
 title: Writing technical content in Academic
+date: 2019-07-12
+math: true
+diagram: true
 ---
 
 Academic is designed to give technical content creators a seamless experience. You can focus on the content and Academic handles the rest.
