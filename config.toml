@@ -21,6 +21,8 @@ googleAnalytics = ""
 # Enable comments by entering your Disqus shortname
 disqusShortname = ""
 
+# where to publish site to
+publishDir = "docs/"
 
 ############################
 ## Advanced options below ##
