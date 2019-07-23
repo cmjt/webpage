@@ -14,8 +14,8 @@ In brief, to build a similar webpage
     - Edit `content/authors/adim/_index.md` as appropriate and add a bio picture `avatar.jpg/png` in the same directory.
     - In `content/home` edit the relevant `.md` files as required and delete those not needed. The weight specified in each file will dictate the ordering of the sections (higher weight the lower down the section).
     - The `page_type` specified in the`.md` files in `content/home` should refer to a directory in `content/` (e.g., `projects.md` should specify `page_type = "project"` and therefore `project/` should be a directory in `content/`.
-    - Each linked directory (as `project/` above) should contain named sub directories each with two files---`index.md` and `featured.png/jpg`. The `index.md files should give a brief description of the project etc. The image `featured.png/jpg` will be displayed with this information in the relevant section on your webpage.
-    - To change the ordering or menu text edit the `config/_default/menues.toml` file. Here again the specified `weight` dictates ordering and the url for each link should point to the relevant filename in `content/home`.
+    - Each linked directory (as `project/` above) should contain named sub directories each with two files---`index.md` and `featured.png/jpg`. The `index.md` files should give a brief description of the project etc. The image `featured.png/jpg` will be displayed with this information in the relevant section on your webpage.
+    - To change the ordering or menu text edit the `config/_default/menues.toml` file. Here again the specified `weight` dictates ordering and the `url` for each link should point to the relevant filename in `content/home`.
     - To change the icon in the tab change the icons in `static/img`.
     - Other changes can be made to `config.toml` to change layout; see [here]((https://sourcethemes.com/academic/docs/get-started/)) for more advanced options.
 
