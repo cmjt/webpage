@@ -11,4 +11,4 @@ Often data are both spatially and temporally correlated. We can fit models to es
 
 The student will require good R programming skills.
 
-Click [here](https://www.auckland.ac.nz/en/study/scholarships-and-awards/scholarship-types/undergraduate-scholarships/summer-research-scholarships/how-to-apply.html) to apply
+[Applications](https://www.auckland.ac.nz/en/study/scholarships-and-awards/scholarship-types/undergraduate-scholarships/summer-research-scholarships/how-to-apply.html) now closed

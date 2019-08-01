@@ -11,4 +11,4 @@ Earthquakes evolve through contagious mechanisms: the occurrence of one earthqua
 
 The student will require good R programming skills and be familiar with maximum likelihood estimation. A good grade in STATS 310 would be an advantage.
 
-Click [here](https://www.auckland.ac.nz/en/study/scholarships-and-awards/scholarship-types/undergraduate-scholarships/summer-research-scholarships/how-to-apply.html) to apply
+[Applications](https://www.auckland.ac.nz/en/study/scholarships-and-awards/scholarship-types/undergraduate-scholarships/summer-research-scholarships/how-to-apply.html) now closed
