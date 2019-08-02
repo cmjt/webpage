@@ -24,20 +24,28 @@ subtitle = ""
   [[content.filter_button]]
     name = "All"
     tag = "*"
-  
+
+  [[content.filter_button]]
+     name = "Honours projects"
+     tag = "honours"
+
+  [[content.filter_button]]
+     name = "Masters projects"
+     tag = "masters"
+
   [[content.filter_button]]
     name = "Summer Research Scholarships"
     tag = "summer scholarship"
   
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.
-  columns = "2"
+  columns = "1"
 
   # Toggle between the various page layout types.
   #   1 = List
   #   3 = Card
   #   5 = Showcase
-  view = 5
+  view = 3
 
   # For Showcase view, flip alternate rows?
   flip_alt_rows = false

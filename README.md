@@ -9,7 +9,7 @@ In brief, to build a similar webpage
 
  1. Install the `R` package `blogdown` and download/deploy a new site with the academic theme
  `blogdown::new_site(theme = "gcushen/hugo-academic")` into an empty directory.
- 2. Run `blogdown::site_serve()` and the site will open in your browser.
+ 2. Run `blogdown::serve_site()` and the site will open in your browser.
  3. Personalise
     - Edit `content/authors/adim/_index.md` as appropriate and add a bio picture `avatar.jpg/png` in the same directory.
     - In `content/home` edit the relevant `.md` files as required and delete those not needed. The weight specified in each file will dictate the ordering of the sections (higher weight the lower down the section).
