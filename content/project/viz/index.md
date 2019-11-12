@@ -1,8 +1,9 @@
 ---
 title: Visualising spatial processes in R
-summary: Summer Research Scholarship project 2019--2020
+summary: Honours or masters project
 tags:
-- summer scholarship
+- honours
+- masters
 date: "2019-07-20T00:00:00Z"
 
 ---
