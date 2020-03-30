@@ -50,9 +50,11 @@ Loaves:
 
 {{< figure src="bowl_turn.jpg" width="300" >}}
 
- + After 3hrs turn dough onto an unfloured worksurface. Lightly flour dough top with wholemeal or white and cut in half. With each half flip over so floured surface on bottom and fold each side over (sort of like an envelope). Then turn in a circle and shape. Stop when it starts to feel a bit sticky. Leave covered for half an hour.
+ + After the 3 hours are up turn the dough onto an unfloured worksurface. Lightly flour dough top with wholemeal or white flour and cut in half. With each half flip over so floured surface on bottom and fold each side over (sort of like an envelope). Then turn in a circle and shape. Stop when it starts to feel a bit sticky. Leave covered for half an hour.
  
 {{< figure src="turn_onto_bench.jpg" width="300" >}}
+
+{{< figure src="bench_envelope.jpg" width="300" >}}
 
 {{< figure src="bench_rest.jpg" width="300" >}}
 
