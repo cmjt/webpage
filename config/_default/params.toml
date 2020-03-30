@@ -3,26 +3,26 @@
 
 # Color theme.
 #   Choose from `default`, `ocean`, `forest`, `dark`, `apogee`, `1950s`, `coffee`, `rose`, `strawberry`, `mr_robot`.
-color_theme = "dark"
+color_theme = "rose"
 # Enable users to switch between day and night mode?
 day_night = false
 
 # Font style.
 #   Choose from `default`, `classic`, `rose`, or `mr_robot`.
-font = "default"
+font = "classic"
 
 # Description for social sharing and search engines. If undefined, superuser role is used in place.
 description = ""
 
 # Default image for social sharing and search engines. Place image in `static/img/` folder and specify image name here.
-sharing_image = ""
+sharing_image = "icon.png"
 
 # Twitter username (without @). Used when a vistor shares your site on Twitter.
 twitter = "cmjonestodd"
 
 # Diplay a logo in navigation bar rather than title (optional).
 #   To enable, place an image in `static/img/` and reference its filename below. To disable, set the value to "".
-logo = ""
+logo = "icon.png"
 
 # Enable source code highlighting? true/false
 # Documentation: https://sourcethemes.com/academic/docs/writing-markdown-latex/#highlighting-options
@@ -49,9 +49,9 @@ edit_page = {repo_url = "https://github.com/gcushen/hugo-academic", editable = {
 
 # Date and time format (refer to https://sourcethemes.com/academic/docs/customization/#date-format )
 #   Examples: "Mon, Jan 2, 2006" or "2006-01-02"
-date_format = "Jan 2, 2006"
+date_format = ""
 #   Examples: "3:04 pm" or "15:04"
-time_format = "3:04 PM"
+# time_format = "3:04 PM"
 
 ############################
 ## Contact Widget setup   ##
@@ -93,11 +93,11 @@ contact_links = [
 #   1: Google Maps
 #   2: OpenStreetMap (Mapnik)
 #   3: OpenStreetMap (Mapbox)
-map = 0
-map_api_key = ""
-latitude = ""
-longitude = ""
-zoom = 15
+# map = 0
+# map_api_key = ""
+# latitude = ""
+# longitude = ""
+# zoom = 15
 
 ############################
 ## Plugins                ##
@@ -130,13 +130,13 @@ section_pager = false
 docs_section_pager = true  # Display pager in Docs layout (e.g. tutorials)?
 
 # Enable in-built social sharing buttons? (true/false)
-sharing = true
+sharing = false
 
 # Configuration of publication pages.
 [publications]
   # Date format (refer to https://sourcethemes.com/academic/docs/customization/#date-format )
   #   Examples: "Mon, Jan 2, 2006" or "2006-01-02"
-  date_format = "January 2006"
+  date_format = ""
 
   # Citation style ("apa" or "mla")
   citation_style = "apa"

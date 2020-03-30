@@ -4,7 +4,6 @@ summary: Honours or masters project
 tags:
 - honours
 - masters
-date: "2019-08-02T00:00:00Z"
 
 ---
 

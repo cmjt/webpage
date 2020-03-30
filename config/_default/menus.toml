@@ -23,6 +23,11 @@
   url = "#projects"
   weight = 40
 
+[[main]]
+  name = "Popty"
+  url = "#popty"
+  weight = 50
+
 
 
 # Link to a PDF of your resume/CV from the menu.
