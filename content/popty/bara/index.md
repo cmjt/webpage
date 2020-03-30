@@ -37,7 +37,7 @@ Loaves:
 
   + Add 900g white bread flour and 100g of wholemeal. If you want a more wholemeal type loaf you can change the flour quantities accordingly, but keep total flour weight to 1kg. The more wholemeal you add the longer you should leave between turns and you may have to add a bit more water at this stage of mixture is too stiff.
 
- + Mix in all flour to water mixture until no dry flour is left. Cover with tea towel and let rest got half an hour.
+ + Mix in all flour to water mixture until no dry flour is left. Cover with tea towel and let rest for half an hour.
 
 {{< figure src="bowl_initial.jpg" width="300" >}}
 
@@ -50,7 +50,7 @@ Loaves:
 
 {{< figure src="bowl_turn.jpg" width="300" >}}
 
- + After the 3hrs turn dough onto an unfloured worksurface. Lightly flour dough top with wholemeal or white and cut in half. With each half flip over so floured surface on bottom and fold each side over (sort of like an envelope). Then turn in a circle and shape. Stop when it starts to feel a bit sticky. Leave covered for half an hour.
+ + After 3hrs turn dough onto an unfloured worksurface. Lightly flour dough top with wholemeal or white and cut in half. With each half flip over so floured surface on bottom and fold each side over (sort of like an envelope). Then turn in a circle and shape. Stop when it starts to feel a bit sticky. Leave covered for half an hour.
  
 {{< figure src="turn_onto_bench.jpg" width="300" >}}
 
