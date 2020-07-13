@@ -1,0 +1,57 @@
+---
+
+title: "Me, myself, and R"
+subtitle: "R-Ladies AKL"
+author: "Charlotte M. Jones-Todd <br> ![](img/twitter.svg)@cmjonestodd"
+institute: "University of Auckland"
+date: "![](img/slides.png){width=5%} [cmjt.github.io/slides/rladies](cmjt.github.io/slides/rladies)"
+header-includes:
+   - \usepackage{xcolor}
+   - \usepackage{amsmath}
+output:
+  xaringan::moon_reader:
+    includes:
+      after_body: "src/typed.js"
+    css: ["src/ladies-theme.css"]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "libs/macros.js"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+--- 
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+
+
+
+
+---
+
+### Diolch am wrando
+
+
+.pull-left[
+.animate__animated.animate__bounceInDown[
+```{r dragon, echo = FALSE, comment = ""}
+## linux <sudo apt-get install cowsay>
+system2("cowsay", args = "-f dragon 'Questions?'", stdout = TRUE)
+```
+]
+]
+.pull-right[
+
+.center[`r icon::fa_twitter(colour = "#00ACEE")` @cmjonestodd]
+
+.center[`r icon::fa_desktop()` [cmjt.github.io/slides/rladies](cmjt.github.io/slides/rladies)]
+
+]
