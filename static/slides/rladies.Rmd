@@ -27,7 +27,7 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 ```
-### Prifysgol Aberystwyth
+## Prifysgol Aberystwyth
 
 .pull-right[
 ![](https://upload.wikimedia.org/wikipedia/en/e/ea/Uwa_crest_colour-new.png)
@@ -42,7 +42,7 @@ knitr::include_graphics("https://preview.redd.it/evam7q9ml9l21.jpg?width=960&cro
 
 ---
 
-### University of St Andrews
+## University of St Andrews
 
 .animate__animated.animate__rollIn.animate__slower[
 .pull-left[
@@ -57,7 +57,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-il
 
 ---
 
-### NIWA
+## NIWA
 
 .animate__animated.animate__rollIn.animate__slower[
 .pull-left[
@@ -72,7 +72,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-il
 
 ---
 
-### NIWA
+## NIWA
 
 .pull-right[
 ```{r, echo=FALSE, out.width="45%"}
@@ -104,12 +104,10 @@ knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-il
 ]
 
 
-
-
 ---
 
 
-### University of Auckland
+## University of Auckland
 
 .animate__animated.animate__rollIn.animate__slower[
 .pull-left[
@@ -123,21 +121,82 @@ knitr::include_graphics("https://pics.me.me/yours-is-the-worst-code-ihave-ever-r
 ]
 ---
 
-### Diolch am wrando
+## Teaching 
 
+`r icon::fa_desktop()` [cmjt.github.io/statbiscuits](cmjt.github.io/slides/statbiscuits)
+
+![](https://raw.githubusercontent.com/cmjt/statbiscuits/master/gifs/perp.gif)
+
+---
+
+## Research
+.center[
+```{r, echo=FALSE, out.width="50%"}
+knitr::include_graphics("https://pbs.twimg.com/media/DuKns0KX4AAvApq?format=jpg&name=small")
+```
+]
+
+---
+
+## Research
+
+.center[
+```{r, echo=FALSE, out.width="50%"}
+knitr::include_graphics("img/selfe.png")
+```
+]
+---
+
+### Vizualising rivers
+.center[
+![](https://pbs.twimg.com/media/ETMf11xVAAAEfMw?format=png&name=small)
+]
+---
+
+## #dataviz
+
+.center[
+![](https://pbs.twimg.com/media/EKbXSzlVAAAN50C?format=png&name=small)
+]
+---
+
+## Unwitting helpers
+
+
+* @earowang
+
+<iframe src="https://slides.earo.me/rladiesakl20" height="90" frameborder="0"  width="133"></iframe> 
+
+* @annafergussonnz
+
+<iframe src="https://twitter.com/annafergussonnz" height="100" frameborder="0" width="133"></iframe> 
+* ...
+* basically you put something on `r icon::fa_twitter(colour = "#00ACEE")` or `r icon::fa_github()` and I will steal it
+
+
+---
+
+## Diolch am wrando
+
+```{r, eval = FALSE, echo = FALSE}
+## linux <sudo apt-get install cowsay>
+```
 
 .pull-left[
 .animate__animated.animate__bounceInDown[
 ```{r dragon, echo = FALSE, comment = ""}
-## linux <sudo apt-get install cowsay>
 system2("cowsay", args = "-f dragon 'Questions?'", stdout = TRUE)
 ```
 ]
 ]
 .pull-right[
-
+<br>
+<br>
+<br>
 .center[`r icon::fa_twitter(colour = "#00ACEE")` @cmjonestodd]
-
-.center[`r icon::fa_desktop()` [cmjt.github.io/slides/rladies](cmjt.github.io/slides/rladies)]
+<br>
+.center[`r icon::fa_github()` @cmjt]
+<br>
+.center[<i class="fas fa-images"></i>  [cmjt.github.io/slides/rladies](cmjt.github.io/slides/rladies)]
 
 ]
