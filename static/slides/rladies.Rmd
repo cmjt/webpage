@@ -1,5 +1,4 @@
 ---
-
 title: "Me, myself, and R"
 subtitle: "R-Ladies AKL"
 author: "Charlotte M. Jones-Todd <br> ![](img/twitter.svg)@cmjonestodd"
@@ -10,8 +9,6 @@ header-includes:
    - \usepackage{amsmath}
 output:
   xaringan::moon_reader:
-    includes:
-      after_body: "src/typed.js"
     css: ["src/ladies-theme.css"]
     nature:
       ratio: 16:9
@@ -30,11 +27,100 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 ```
+### Prifysgol Aberystwyth
+
+.pull-right[
+![](https://upload.wikimedia.org/wikipedia/en/e/ea/Uwa_crest_colour-new.png)
+]
+
+.animate__animated.animate__rollIn.animate__slower[
+.pull-left[
+```{r, echo=FALSE, out.width="70%"}
+knitr::include_graphics("https://preview.redd.it/evam7q9ml9l21.jpg?width=960&crop=smart&auto=webp&s=41a7c8616b4e60ed7166191c7618c5c0f734d08f")
+```
+]]
+
+---
+
+### University of St Andrews
+
+.animate__animated.animate__rollIn.animate__slower[
+.pull-left[
+```{r, echo=FALSE, out.width="70%",fig.cap="Artwork by @allison_horst"}
+knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/r_first_then.png")
+```
+]]
+
+.pull-right[
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/University_of_St_Andrews_arms.svg/200px-University_of_St_Andrews_arms.svg.png)
+]
+
+---
+
+### NIWA
+
+.animate__animated.animate__rollIn.animate__slower[
+.pull-left[
+```{r, echo=FALSE, out.width="70%",fig.cap="Artwork by @allison_horst"}
+knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/welcome_to_rstats_twitter.png")
+```
+]]
+
+.pull-right[
+![](https://i.vimeocdn.com/portrait/26128833_300x300.webp)
+]
+
+---
+
+### NIWA
+
+.pull-right[
+```{r, echo=FALSE, out.width="45%"}
+knitr::include_graphics("https://www.nesi.org.nz/sites/default/files/media/software%20carpentry%20logo.png")
+```
+]
+
+
+.pull-left[
+
+<br>
+<br>
+<br>
+```{r, echo=TRUE, eval = FALSE}
+files <- list.files(pattern = ".csv")
+files <- lapply(files, read.csv)
+res <- do.call('rbind',files)
+```
+]
+
+
+--
+.overlay[
+.pull-left[
+```{r, echo=FALSE, out.width="50%",fig.cap="Artwork by @allison_horst"}
+knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/tidyverse_celestial.png")
+```
+]
+]
 
 
 
 
+---
 
+
+### University of Auckland
+
+.animate__animated.animate__rollIn.animate__slower[
+.pull-left[
+```{r, echo=FALSE, out.width="70%"}
+knitr::include_graphics("https://pics.me.me/yours-is-the-worst-code-ihave-ever-run-but-it-60917985.png")
+```
+]]
+
+.pull-right[
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-eXMxc_sEOwFYHehTYyYGTZUyRnTDA_0B7A818ihjuwR69Cc&s)
+]
 ---
 
 ### Diolch am wrando
