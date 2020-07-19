@@ -63,7 +63,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-il
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/University_of_St_Andrews_arms.svg/200px-University_of_St_Andrews_arms.svg.png)
 ]
 
---
 
 .overlay-r[
 <br>
@@ -184,7 +183,9 @@ knitr::include_graphics("https://pics.me.me/yours-is-the-worst-code-ihave-ever-r
 
 .panel[.panel-name[Stats memes]
 .pull-left[
-![](https://d1b10bmlvqabco.cloudfront.net/attach/k2tzpqr1rjh2mv/k7cg6fnhql5w4/kaljzm66qd65/aov.jpg)
+```{r, echo=FALSE, out.width="80%"}
+knitr::include_graphics("https://d1b10bmlvqabco.cloudfront.net/attach/k2tzpqr1rjh2mv/k7cg6fnhql5w4/kaljzm66qd65/aov.jpg")
+```
 ]
 .pull-right[
 ![](https://d1b10bmlvqabco.cloudfront.net/attach/k2tzpqr1rjh2mv/k7cg6fnhql5w4/karrfqoxqnxo/unnamed.jpg)
@@ -204,7 +205,18 @@ knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-il
 ```
 ]
 ]
-.panel[.panel-name[flipbookr]
+.panel[.panel-name[live coding  `r emo::ji('scream')`]
+
+```{r errors, echo = TRUE, error = TRUE}
+data <- read.csv("data_file_not_in_my_working_directory.csv")
+
+library(some_library_I_have_not_insalled)
+
+some_function_I_spelled_wrong(x = x)
+
+an_object_I_have_not_created
+
+```
 
 
 ]
@@ -263,16 +275,20 @@ knitr::include_graphics("img/code.png")
 
 ## Vizualising rivers
 
+
 .center[
-![](https://pbs.twimg.com/media/ETMf11xVAAAEfMw?format=png&name=small)
+```{r, echo=FALSE, out.height="90%"}
+knitr::include_graphics("https://pbs.twimg.com/media/ETMf11xVAAAEfMw?format=png&name=small")
+```
 ]
 
-.footnote[devtools::install_github("cmjt/hexr") ## UNDER DEVELOPMENT]
+.footnote[`r icon::fa_desktop()` [https://gist.github.com/cmjt/238e6d01f5870f6c32e7870f51987650](https://gist.github.com/cmjt/238e6d01f5870f6c32e7870f51987650)]
 
 ---
 
 
 ```{r hexr, echo = FALSE, include = FALSE}
+## devtools::install_github("cmjt/hexr") ## UNDER DEVELOPMENT
 library(hexr)
 library(sp)
 library(ggplot2)
@@ -320,13 +336,12 @@ library(magrittr)
 available <- hexr::mfe_data(key = key)
 str(available)
 mfe <- hexr::get_mfe_data(id = "layer-53318", key = key)
-##plot(mfe)
+class(mfe)
 ```
 
+
 `r chunk_reveal("mfe")`
-
 ---
-
 
 
 
