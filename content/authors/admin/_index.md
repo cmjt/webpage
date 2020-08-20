@@ -18,13 +18,15 @@ organizations:
   url: "https://www.auckland.ac.nz/en.html"
 
 # Short bio (displayed in user profile at end of posts)
-bio: My main research focus is the development of spatio-temporal models that account for the spatial and temporal dependence inherent in data.
+bio: I spend my time teaching stats, coding—then fixing—bugs, pandering to my pets, and making gin.
 
 
 interests:
-- Spatial statistics
+
 - Point processes
 - Ecological statistics
+- Teaching statistics
+- Baking
 
 education:
   courses:
@@ -71,4 +73,4 @@ user_groups:
 - Visitors
 ---
 
-My main research focus is the development of spatio-temporal models that account for the spatial and temporal dependence inherent in data.
+I spend my time teaching stats, coding—then fixing—bugs, pandering to my pets, and making gin.

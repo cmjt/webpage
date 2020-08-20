@@ -5,7 +5,7 @@ headless = true  # This file represents a page section.
 active = true  # Activate this widget? true/false
 weight = 40  # Order that this section will appear.
 
-title = "Student projects"
+title = "UoA student projects"
 subtitle = ""
 
 [content]
@@ -32,6 +32,10 @@ subtitle = ""
   [[content.filter_button]]
      name = "Masters projects"
      tag = "masters"
+
+ [[content.filter_button]]
+     name = "Summer scholarship projects"
+     tag = "summer"
   
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.
