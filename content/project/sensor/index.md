@@ -1,6 +1,6 @@
 ---
 title: Spatial modelling of sensor networks
-summary: Honours or masters project
+summary: data wrangling, modelling
 tags:
 - honours
 - masters

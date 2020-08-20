@@ -1,6 +1,6 @@
 ---
 title: Quantitative microbial risk assessment 
-summary: Honours or masters project
+summary: dose-response, programming
 tags:
 - honours
 - masters
