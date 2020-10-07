@@ -1,0 +1,57 @@
+---
+title: "Getting to the point of log-Gaussian Cox processes"
+subtitle: ""
+author: "Charlotte M. Jones-Todd <br> ![](img/twitter.svg)@cmjonestodd"
+institute: "University of Auckland"
+date: ""
+header-includes:
+   - \usepackage{xcolor}
+   - \usepackage{amsmath}
+output:
+  xaringan::moon_reader:
+    css: ["src/default-theme.css"]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "libs/macros.js"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+--- 
+
+
+```{r setup, include=FALSE}
+
+options(htmltools.dir.version = FALSE)
+```
+
+
+
+### Diolch am wrando
+```{r, eval = FALSE, echo = FALSE}
+## linux <sudo apt-get install cowsay>
+```
+
+.pull-left[
+.animate__animated.animate__bounceInDown[
+```{r dragon, echo = FALSE, comment = ""}
+system2("cowsay", args = "-f dragon 'Questions?'", stdout = TRUE)
+```
+]
+]
+
+
+.pull-right[
+<br>
+<br>
+<br>
+.center[`r icon::fa_twitter(colour = "#00ACEE")` @cmjonestodd]
+<br>
+.center[`r icon::fa_github()` @cmjt]
+<br>
+.center[<i class="fas fa-images"></i>  [cmjt.github.io/slides/rladies](https://cmjt.github.io/slides/rladies)]
+]
