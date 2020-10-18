@@ -1,4 +1,9 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css");
+.title-slide {
+  background-image: url('../img/airports.png');
+  background-size: cover;
+}
+
 .small {
     font-size: 50%;
 }

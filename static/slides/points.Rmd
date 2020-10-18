@@ -38,7 +38,7 @@ options(htmltools.dir.version = FALSE)
 
 .pull-left[
 .animate__animated.animate__bounceInDown[
-```{r dragon, echo = FALSE, comment = ""}
+```{r dragon, echo = FALSE,eval = FALSE, comment = ""}
 system2("cowsay", args = "-f dragon 'Questions?'", stdout = TRUE)
 ```
 ]
