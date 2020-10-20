@@ -3,7 +3,7 @@ title: "Modelling systematic effects and latent phenomena in point referenced da
 subtitle: ""
 author: "Charlotte M. Jones-Todd <br> ![](img/twitter.svg)@cmjonestodd"
 institute: "![](img/uoa.png){width=5%} University of Auckland"
-date: ""
+date: "![](img/slides.png){width=5%} [cmjt.github.io/slides/points](https://cmjt.github.io/slides/points)"
 header-includes:
    - \usepackage{xcolor}
    - \usepackage{amsmath}
@@ -32,9 +32,9 @@ library(Manu)
 ## devtools::install_github("G-Thomson/Manu") ## NZ bird colour palettes
 ```
 
-### What is a point pattern?
 
-```{r, echo=FALSE,  out.width="30%"}
+
+```{r, echo=FALSE,  out.width="40%"}
 knitr::include_graphics("img/recaptcha.jpg")
 ```
 
@@ -44,6 +44,59 @@ knitr::include_graphics("img/recaptcha.jpg")
 
 
 ```{r pps,fig.width=15,fig.height=5}
+library(spatstat)
+set.seed(4321)
+locs <- cbind(runif(100),runif(100))
+pp <- ppp(locs[,1], locs[,2])
+win <- owin()
+par(mfrow = c(1,3), mar = c(0,0,0,0))
+## point pattern
+plot(locs,axes = "F",pch = 20,xlab = "",ylab = "",xlim = c(0,1),ylim = c(0,1),col = "darkgrey")
+plot(win,add = TRUE)
+## quadrat count
+plot(locs,axes = "F",pch = 20,xlab = "",ylab = "",xlim = c(0,1),ylim = c(0,1),col = "darkgrey")
+plot(win,add = TRUE)
+q <- quadratcount(pp,5,5)
+plot(q,add = TRUE,cex = 1.5)
+## quad count finer matrix
+plot(locs,axes = "F",pch = 20,xlab = "",ylab = "",xlim = c(0,1),ylim = c(0,1),col = "darkgrey")
+plot(win,add = TRUE)
+q <- quadratcount(pp,10,10)
+plot(q,add = TRUE,cex = 1.5)
+```
+
+
+---
+# Cancer work
+
+---
+.center[
+```{r, fig.align='center', out.width="100%"}
+knitr::include_graphics("img/cancer_im.png")
+```
+]
+---
+
+.center[
+```{r, fig.align='center', out.width="100%"}
+knitr::include_graphics("img/cancer_pp.png")
+```
+]
+---
+
+.center[
+```{r, fig.align='center', out.width="100%"}
+knitr::include_graphics("img/cancer_nn.png")
+```
+]
+---
+# But what about unexplained stucture...
+---
+
+### Remember
+
+
+```{r ppr,fig.width=15,fig.height=5}
 library(spatstat)
 set.seed(4321)
 locs <- cbind(runif(100),runif(100))
@@ -92,11 +145,63 @@ points(locs,pch = 20)
 ```
 
 ---
+### Random Fiedls
 
-### SPDE
+```{r rfs, fig.width=15,fig.height=5, fig.align='center'}
+library(spatstat)
+spatstat.options(npixel=300)
+sigma2x <- c(1,1,3)
+kappax <- c(2,3,10)
+rangex <- sqrt(8*1)/kappax
+beta0 <- 3
+library(RandomFields)
+set.seed(5432)
+fields <- points <- list()
+for (i in 1:3){
+    lg.s <- rLGCP('matern', beta0,
+                  var=sigma2x[i], scale=1/kappax[i], nu=1)
+    ## points
+    points[[i]] <- cbind(lg.s$x, lg.s$y)[,2:1]
+    ## exponential of LGRF
+    Lam <- attr(lg.s, 'Lambda')
+    fields[[i]] <- log(Lam$v)
+}
+layout(matrix(c(0,1,2,3,4,
+                0,0,0,0),nrow = 2,byrow = TRUE),respect = TRUE,
+       widths = c(0.4,3,3,3,3),
+       heights = c(3,0.2))
+
+par(mar = c(0,0,0,0),xpd = TRUE,oma = c(0,0,0,0))
+x <- seq(1,5, length.out = 100)
+plot(x, rSPDE::matern.covariance(x, kappa = kappax[1], nu = 1, sigma = sqrt(sigma2x[1])),
+     type = "l", ylab ="", xlab = "",lwd = 2,xaxt = "n")
+mtext(line = 0.5, side = 1, "Distances between points")
+mtext(line = 2,side = 2, expression(C[z]))
+lines(x,rSPDE::matern.covariance(x, kappa = kappax[2], nu = 1, sigma = sqrt(sigma2x[2])), lty = 2,lwd = 2)
+lines(x,rSPDE::matern.covariance(x, kappa = kappax[3], nu = 1, sigma = sqrt(sigma2x[3])), lty = 3,lwd = 2)
+legend("topright",bty = "n", lty = 1:3,lwd = 2, legend = c("i)","ii)", "iii)"),cex = 2)
+## fields
+image(fields[[1]],axes = FALSE,  col = RColorBrewer::brewer.pal(9, "Blues"),asp = 1)
+points(points[[1]],pch = 20)
+legend(-0.05,0.1,bty = "n", cex = 2,legend = "i)")
+box()
+image(fields[[2]],axes = FALSE,  col = RColorBrewer::brewer.pal(9, "Blues"), asp = 1)
+points(points[[2]],pch = 20)
+legend(-0.05,0.1,,bty = "n", cex = 2,legend = "ii)")
+box()
+image(fields[[3]],axes = FALSE,  col = RColorBrewer::brewer.pal(9, "Blues"),asp = 1)
+points(points[[3]],pch = 20)
+legend(-0.05,0.1,,bty = "n", cex = 2,legend = "iii)")
+box()
+```
+
+---
+
+
+### Bed sheets...
 
 .center[
-```{r spdefig.height=8,fig.width=8}
+```{r spdefig.height=10,fig.width=10}
 library(plotly)
 n <- seq(-4,4,length.out = 10)
 n <- rep(n, each = 10) 
@@ -121,7 +226,7 @@ p
 
 ---
 
-### Mesh
+### Cutting up space `r emo::ji("knife")`
 
 ```{r mesh,fig.height=8,fig.width=8}
 library(INLA)
@@ -130,6 +235,163 @@ image(z2,axes = FALSE,col = cols)
 plot(mesh,main = "",add = TRUE)
 points(mesh$loc,pch = 20)
 ```
+
+---
+# Other work
+---
+## Self-exciting fields
+---
+
+.center[![](https://cmjt.github.io/project/selfpp/featured_hua3418a03230c5d04b557dd56e4a5f8f4_30096_720x0_resize_lanczos_2.png)]
+
+---
+## Network distances
+---
+
+.center[![](img/attacks.gif)]
+
+---
+
+.center[![](img/networks.gif)]
+
+---
+## Marine mammal exposure to Navy sonar
+---
+
+### Discrete-space continuous-time
+
+
+
+Let $q_{rs}(t,z(t))$ represent the immediate risk of moving from one state $r$ to another state $s$:
+
+$$q_{rs}(t,z(t)) = \text{lim}_{\delta t \rightarrow 0} \mathbb{P}(S(t + \delta t) = s|S(t) = r)/\delta t.$$
+
+These transition rates form a square matrix $\bf{Q}$ with elements $q_{rs}$.
+
+--
+
+
+Here $q_{rr}=-\Sigma_{s{\neq}r}q_{rs}$ (i.e., the rows of **Q** sum to zero and $q_{rs}\geq0$ for $r{\neq}s$).
+
+--
+
+We have $r, s = \{1,2\}$ where state $1=$ off-range (i.e., outside the area used by the Navy for military operations) and state $2=$ on-range:
+
+$$\begin{array}{ccc}
+  \bf{Q} =
+  \left [\begin{array}{cc}
+    q_{1 1} & q_{1 2} \\
+      q_{2 1} & q_{2 2}
+    \end{array}\right ] & \text{where} \: q_{r r} = -q_{r s}, & \text{for}\: r \neq s.
+  \end{array}$$
+
+
+
+---
+
+### Marine mammal exposure to Navy sonar
+
+.center[
+```{r track, out.width="50%"}
+knitr::include_graphics("img/autec.png")
+```
+]
+
+
+
+---
+
+### Marine mammal exposure to Navy sonar
+
+We let 
+
+<br>
+
+$$\text{log}(q_{k, rs}(\mathbf{z}_k(t))) = (\beta_{0,rs} + u_{k, rs}) + \beta_{1,rs}\text{exp}(- \beta_{2,rs} \mathbf{z}_k(t)),$$
+
+where
+
+
+$$\mathbf{z}_k(t)  \left\{ \begin{array}{rl} = 0 & \text{during exposure} \\ \geq 0 & \text{otherwise}\end{array} \right.$$
+
+
+is the number of days since an individual was exposed to a sonar event and $\beta_{2,rs} \geq 0$ $\forall\: r \neq s$.
+
+
+
+---
+
+```{r echo = FALSE}
+library(xaringanExtra)
+xaringanExtra::use_panelset()
+```
+
+
+.panelset[
+.panel[.panel-name[93232]
+.center[
+<br>
+<br>
+```{r, echo = FALSE,fig.height = 3,out.width = "80%"}
+knitr::include_graphics("img/whale1.png")
+```
+]
+]
+.panel[.panel-name[11164]
+.center[
+<br>
+<br>
+```{r, echo = FALSE,fig.height = 3,out.width = "80%"}
+knitr::include_graphics("img/whale2.png")
+```
+]
+]
+.panel[.panel-name[111670]
+.center[
+<br>
+<br>
+```{r, echo = FALSE,fig.height = 3,out.width = "80%"}
+knitr::include_graphics("img/whale3.png")
+```
+]
+]
+.panel[.panel-name[129715]
+.center[
+<br>
+<br>
+```{r, echo = FALSE,fig.height = 3,out.width = "80%"}
+knitr::include_graphics("img/whale4.png")
+```
+]
+]
+.panel[.panel-name[129719]
+.center[
+<br>
+<br>
+```{r, echo = FALSE,fig.height = 3,out.width = "80%"}
+knitr::include_graphics("img/whale5.png")
+```
+]
+]
+.panel[.panel-name[129720]
+.center[
+<br>
+<br>
+```{r, echo = FALSE,fig.height = 3,out.width = "80%"}
+knitr::include_graphics("img/whale6.png")
+```
+]
+]
+.panel[.panel-name[129721]
+.center[
+<br>
+<br>
+```{r, echo = FALSE,fig.height = 3,out.width = "80%"}
+knitr::include_graphics("img/whale7.png")
+```
+]
+]
+]
 
 
 
