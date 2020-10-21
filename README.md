@@ -4,7 +4,7 @@
 | ---------  | ------ | ---- |
 | #vISEC2020 | [https://cmjt.github.io/slides/visec2020](https://cmjt.github.io/slides/visec2020) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/visec2020.Rmd) |
 | RladiesAKL | [https://cmjt.github.io/slides/rladies](https://cmjt.github.io/slides/rladies) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/rladies.Rmd) |
-| RladiesAKL | [https://cmjt.github.io/slides/points](https://cmjt.github.io/slides/points) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/points.Rmd) |
+| MOdelling point patterns | [https://cmjt.github.io/slides/points](https://cmjt.github.io/slides/points) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/points.Rmd) |
 
 ## Website
 
