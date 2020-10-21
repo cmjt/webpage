@@ -4,6 +4,7 @@
 | ---------  | ------ | ---- |
 | #vISEC2020 | [https://cmjt.github.io/slides/visec2020](https://cmjt.github.io/slides/visec2020) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/visec2020.Rmd) |
 | RladiesAKL | [https://cmjt.github.io/slides/rladies](https://cmjt.github.io/slides/rladies) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/rladies.Rmd) |
+| RladiesAKL | [https://cmjt.github.io/slides/points](https://cmjt.github.io/slides/points) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/points.Rmd) |
 
 ## Website
 
@@ -28,6 +29,6 @@ In brief, to build a similar webpage
     - To change the icon in the tab change the icons in `static/img`.
     - Other changes can be made to `config.toml` to change layout; see [here]((https://sourcethemes.com/academic/docs/get-started/)) for more advanced options.
 
- 4. To deploy on GitHub I set `baseurl = "https://cmjt.github.io"` and added `publishDir = "../cmjt.github.io"` into `config.toml` (don't forget to change `cmjt` to your own GitHub handle!). The former is the web address the webpage will be deployed to and the latter is telling `blogdown` to write the static files to the directory "../cmjt.github.io" (i.e., at the same level as the current directory) and not the default `public/` in the root of the folder. Then delete the `public/` folder and re run `blogdown::site_serve()`, check that things are as you expect/want. Now your static webpage files should have been written to `"../<yourGitHubhandle>.github.io"`. Moving into this directory git initialize it, git add & commit, and push to GitHub. Your site should now be available at `"https://<yourGitHubhandle>.github.io"`.
+ 4. To deploy on GitHub I set `baseurl = "https://cmjt.github.io"` and added `publishDir = "../cmjt.github.io"` into `config.toml` (don't forget to change `cmjt` to your own GitHub handle!). The former is the web address the webpage will be deployed to and the latter is telling `blogdown` to write the static files to the directory `../cmjt.github.io` (i.e., at the same level as the current directory) and not the default `public/` in the root of the folder. Then delete the `public/` folder and re run `blogdown::serve_site()`, check that things are as you expect/want. Now your static webpage files should have been written to `"../<yourGitHubhandle>.github.io"`. Moving into this directory git initialize it, git add & commit, and push to GitHub. Your site should now be available at `"https://<yourGitHubhandle>.github.io"`.
 
 
