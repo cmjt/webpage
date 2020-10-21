@@ -28,8 +28,7 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(message = FALSE,cache = TRUE, echo = FALSE, warning = FALSE, fig.align='center')
-library(Manu)
-## devtools::install_github("G-Thomson/Manu") ## NZ bird colour palettes
+
 ```
 
 
@@ -96,9 +95,11 @@ knitr::include_graphics("img/cancer_pp.png")
 
 ---
 
-### `r emo::ji("palm_tree")` The Palm intensity function 
+### `r emo::ji("palm_tree")` The Palm likelihood approach
 
- + The Palm intensity, $\lambda(r; \theta)$, describes how the point density varies as a function of distance $r$ from an arbitrarily chosen point. 
+ + The Palm intensity is a function of distance $r$, characterised by the parameter vector $\theta$: $\lambda(r; \theta)$
+
+ + It describes how the point density varies as a function of distance $r$ from an arbitrarily chosen point. 
   
  + It returns the expected intensity of a point process at a distance $r$ from an arbitrarily chosen point. 
   
@@ -161,8 +162,7 @@ plot(q,add = TRUE,cex = 1.5)
 
 .center[
 ```{r animation,  fig.show='animate', animation.hook='gifski'}
-selected_colours <- get_pal("Kaka")[c(5,3,1)]
-cols <- colorRampPalette(selected_colours)(12)
+cols <- RColorBrewer::brewer.pal(9, "Blues")
 s <- seq(5,50,5)
 for(i in 1:length(s)){
   q <- quadratcount(pp,s[i],s[i])
@@ -233,12 +233,10 @@ box()
 ```
 
 ---
-### But what about the unknown...
-
-#### Bed sheets...
+### `r emo::ji("bed")` Bed sheets?
 
 .center[
-```{r spdefig.height=10,fig.width=10}
+```{r spde,fig.height=8,fig.width=8,fig.align='center'}
 library(plotly)
 n <- seq(-4,4,length.out = 10)
 n <- rep(n, each = 10) 
@@ -248,8 +246,8 @@ n <- seq(-4,4,length.out = 100)
 z2 <-  outer(X = n,Y = n,function(X,Y) sin(X)*cos(Y)) + 2
 
 p <- plot_ly(showscale = FALSE) %>%
-  add_surface(z = ~z, cmin = min(z), cmax = max(z), colorscale = list(c(0, 1), c("#A8B9CB", "#A7473A"))) %>%
-  add_surface(z = ~z2, cmin = min(z2), cmax = max(z2),colorscale = list(c(0, 1), c("#A8B9CB", "#A7473A")), opacity = 0.98) %>%
+  add_surface(z = ~z, cmin = min(z), cmax = max(z), colorscale = list(c(0, 1), c("#F7FBFF", "#08306B"))) %>%
+  add_surface(z = ~z2, cmin = min(z2), cmax = max(z2),colorscale = list(c(0, 1), c("#F7FBFF", "#08306B")), opacity = 0.98) %>%
 layout(
     title = "",
     scene = list(
@@ -282,10 +280,18 @@ of the Royal Statistical Society: Series B (Statistical Methodology), 73(4):423â
 
 ---
 ### Murders in NZ as a LGCP
-$\Lambda(\mathbf{s}) =  \text{exp}(\beta_0  + G(\mathbf{s}))$
-<br>
-$\Lambda(\mathbf{s}) =  \text{exp}(\beta_0  +  \Sigma_{k = 1}^{n_{\text{covs}}} \alpha_k\: x_q(\mathbf{s}) + G(\mathbf{s}))$
 
+.pull-left[
+<br>
+<br>
+<br>
+<br>
+<br>
+$$\Lambda(\mathbf{s}) =  \text{exp}(\beta_0  + G(\mathbf{s}))$$
+$$\Lambda(\mathbf{s}) =  \text{exp}(\beta_0  +  \Sigma_{k = 1}^{n_{\text{covs}}} \alpha_k\: x_q(\mathbf{s}) + G(\mathbf{s}))$$
+]
+
+.pull-right[
 ```{r murders, fig.align='center',fig.width=8,fig.height=8}
 library(stelfi)
 ## nz data
@@ -300,7 +306,7 @@ nz_clip <- stplanr::gclip(nz,murders_nz)
 plot(murders_nz);plot(nz, add = TRUE)
 
 ```
-
+]
 
 .footnote[Work with Charlie Timings, honours student]
 
@@ -321,7 +327,7 @@ weights <- stelfi::get_weights(mesh = mesh, sp = nz, plot = TRUE)
 ### Murders in NZ as a LGCP
 
 
-```{r plot weights,echo = FALSE, fig.width=8,fig.height=8}
+```{r plot weights, fig.width=8,fig.height=8}
 ## function below is a wrapper for
 ## the book.dual.mesh() function supplied
 ## in the INLA-SPDE tutorial mentioned above
@@ -341,18 +347,24 @@ plot(nz, add = TRUE)
 ---
 ### Murders in NZ as a LGCP
 
-```{r murders_fit, fig.align='center',fig.width=8,fig.height=8}
+```{r mod1}
 ## lgcp model
-
 fit <- fit_lgcp_inla(mesh = mesh, locs = coordinates(murders_nz), sp = nz_clip,
                      return.attributes = TRUE)
 
+```
 
+
+```{r murders_fit, fig.align='center',fig.width=8,fig.height=8}
 fields <- stelfi::get_fields(fit, mesh, mean = TRUE)
 grfs <- fields[[1]]
-stelfi::show_field(int <- grfs, mesh, dims = c(300,300),
-                   col = RColorBrewer::brewer.pal(9, "Blues"),
-                   sp = nz,zlim = range(int),asp = 1)
+r <- range(grfs)
+proj = INLA::inla.mesh.projector(mesh, dims = c(300,300))
+field.proj = INLA::inla.mesh.project(proj, grfs)
+image(list(x = proj$x, y=proj$y, z = field.proj),col = RColorBrewer::brewer.pal(9, "Blues"), 
+      axes = FALSE, zlim = r,asp = 1)
+plot(nz,add = TRUE)
+
 ```
 
 .footnote[Work with Charlie Timings, honours student]
@@ -361,19 +373,24 @@ stelfi::show_field(int <- grfs, mesh, dims = c(300,300),
 ---
 ### Murders in NZ as a LGCP
 
-```{r murders_cov, fig.align='center',fig.width=8,fig.height=8, eval = TRUE}
-cov <- fit$summary.linear.predictor$mean[1:(mesh$n + nrow(murders_nz))] + rnorm(mesh$n + nrow(murders_nz))
+```{r mod2}
+cov <- fit$summary.linear.predictor$mean[1:(mesh$n + nrow(murders_nz))] #+ rnorm(mesh$n + nrow(murders_nz))
 covariate <- data.frame(f = cov)
 ## model fitting
 fit <- fit_lgcp_inla(mesh = mesh, locs = coordinates(murders_nz),covariates = covariate, sp = nz_clip,
                      return.attributes = TRUE)
 
+```
+
+```{r murders_cov, fig.align='center',fig.width=8,fig.height=8}
 ## the random field
 fields <- stelfi::get_fields(fit, mesh, mean = TRUE)
 grfs <- fields[[1]]
-stelfi::show_field(grfs, mesh, dims = c(300,300),
-                   col = RColorBrewer::brewer.pal(9, "Blues"),
-                   sp = nz, zlim = range(int),asp = 1)
+proj = INLA::inla.mesh.projector(mesh, dims = c(300,300))
+field.proj = INLA::inla.mesh.project(proj, grfs)
+image(list(x = proj$x, y=proj$y, z = field.proj),col = RColorBrewer::brewer.pal(9, "Blues"), 
+      axes = FALSE, zlim = r,asp = 1)
+plot(nz,add = TRUE)
 ```
 
 .footnote[Work with Charlie Timings, honours student]
@@ -398,7 +415,7 @@ $$p(\mathbf{s}, t) = \text{logit}^{-1}(\alpha_0 + \Sigma_{k = 1}^{n_{\text{covs}
 ### Multiple (shared) random fields
 #### A multi-species model
 
-Let $z_{ik}$ be a binary indicator of the $k^{th}$ species' presence ($k = 1,2,3 =$ sparrowhawk, collared dove, house sparrow) at site $i$. Then $z_{ik} \sim \text{Bernoulli}(p_{ik})$, where $p_{ik}$ is the probability of presence of the $k^{th}$ species at site $i$. Letting $d_{ik}$ be the density of the $k^{th}$ species at location $i$, then $d_{ik}$ is given by, 
+Let $z_{ik}$ be a binary indicator of the $k^{th}$ species' presence ( $k = 1,2,3 =$ sparrowhawk, collared dove, house sparrow) at site $i$. Then $z_{ik} \sim \text{Bernoulli}(p_{ik})$, where $p_{ik}$ is the probability of presence of the $k^{th}$ species at site $i$. Letting $d_{ik}$ be the density of the $k^{th}$ species at location $i$, then $d_{ik}$ is given by, 
 
 $$d_{ik} = \left\{\begin{array}{ll} \text{Gamma}(a_{ik},b_{ik})  &\text{with probability}\; p_{ik}\\
  0,  & \textrm{otherwise,} \end{array}\right.$$
@@ -432,142 +449,6 @@ $$\begin{aligned}
 
 Each $\mathbf{x_j}\{{\mathbf{s}_i,t}\} (j=1,2,3)$ is a spatio-temporal random effect modelled by a SPDE model 
  
----
-
-### Other work: Marine mammal exposure to Navy sonar
-
-.center[
-```{r track, out.width="50%"}
-knitr::include_graphics("img/autec.png")
-```
-]
-
-
-### Marine mammal exposure to Navy sonar
-#### Discrete-space continuous-time
-
-
-
-Let $q_{rs}(t,z(t))$ represent the immediate risk of moving from one state $r$ to another state $s$:
-
-$$q_{rs}(t,z(t)) = \text{lim}_{\delta t \rightarrow 0} \mathbb{P}(S(t + \delta t) = s|S(t) = r)/\delta t.$$
-
-These transition rates form a square matrix $\bf{Q}$ with elements $q_{rs}$.
-
---
-
-
-Here $q_{rr}=-\Sigma_{s{\neq}r}q_{rs}$ (i.e., the rows of **Q** sum to zero and $q_{rs}\geq0$ for $r{\neq}s$).
-
---
-
-We have $r, s = \{1,2\}$ where state $1=$ off-range (i.e., outside the area used by the Navy for military operations) and state $2=$ on-range:
-
-$$\begin{array}{ccc}
-  \bf{Q} =
-  \left [\begin{array}{cc}
-    q_{1 1} & q_{1 2} \\
-      q_{2 1} & q_{2 2}
-    \end{array}\right ] & \text{where} \: q_{r r} = -q_{r s}, & \text{for}\: r \neq s.
-  \end{array}$$
-
-
----
-
-### Marine mammal exposure to Navy sonar
-#### Including exposure information
-
-
-We let 
-
-<br>
-
-$$\text{log}(q_{k, rs}(\mathbf{z}_k(t))) = (\beta_{0,rs} + u_{k, rs}) + \beta_{1,rs}\text{exp}(- \beta_{2,rs} \mathbf{z}_k(t)),$$
-
-where
-
-
-$$\mathbf{z}_k(t)  \left\{ \begin{array}{rl} = 0 & \text{during exposure} \\ \geq 0 & \text{otherwise}\end{array} \right.$$
-
-
-is the number of days since an individual was exposed to a sonar event and $\beta_{2,rs} \geq 0$ $\forall\: r \neq s$.
-
-
-
----
-
-```{r echo = FALSE}
-library(xaringanExtra)
-xaringanExtra::use_panelset()
-```
-
-
-.panelset[
-.panel[.panel-name[93232]
-.center[
-<br>
-<br>
-```{r, echo = FALSE,fig.height = 3,out.width = "80%"}
-knitr::include_graphics("img/whale1.png")
-```
-]
-]
-.panel[.panel-name[11164]
-.center[
-<br>
-<br>
-```{r, echo = FALSE,fig.height = 3,out.width = "80%"}
-knitr::include_graphics("img/whale2.png")
-```
-]
-]
-.panel[.panel-name[111670]
-.center[
-<br>
-<br>
-```{r, echo = FALSE,fig.height = 3,out.width = "80%"}
-knitr::include_graphics("img/whale3.png")
-```
-]
-]
-.panel[.panel-name[129715]
-.center[
-<br>
-<br>
-```{r, echo = FALSE,fig.height = 3,out.width = "80%"}
-knitr::include_graphics("img/whale4.png")
-```
-]
-]
-.panel[.panel-name[129719]
-.center[
-<br>
-<br>
-```{r, echo = FALSE,fig.height = 3,out.width = "80%"}
-knitr::include_graphics("img/whale5.png")
-```
-]
-]
-.panel[.panel-name[129720]
-.center[
-<br>
-<br>
-```{r, echo = FALSE,fig.height = 3,out.width = "80%"}
-knitr::include_graphics("img/whale6.png")
-```
-]
-]
-.panel[.panel-name[129721]
-.center[
-<br>
-<br>
-```{r, echo = FALSE,fig.height = 3,out.width = "80%"}
-knitr::include_graphics("img/whale7.png")
-```
-]
-]
-]
-
 ---
 ### Other work: Self-exciting fields
 
@@ -624,3 +505,138 @@ system2("cowsay", args = "-f dragon 'Questions?'", stdout = TRUE)
 <br>
 .center[<i class="fas fa-images"></i>  [cmjt.github.io/slides/points](https://cmjt.github.io/slides/points)]
 ]
+<!-- ### Other work: Marine mammal exposure to Navy sonar -->
+
+<!-- .center[ -->
+<!-- ```{r track, out.width="50%"} -->
+<!-- knitr::include_graphics("img/autec.png") -->
+<!-- ``` -->
+<!-- ] -->
+
+<!-- --- -->
+
+<!-- ### Marine mammal exposure to Navy sonar -->
+<!-- #### Discrete-space continuous-time -->
+
+
+
+<!-- Let $q_{rs}(t,z(t))$ represent the immediate risk of moving from one state $r$ to another state $s$: -->
+
+<!-- $$q_{rs}(t,z(t)) = \text{lim}_{\delta t \rightarrow 0} \mathbb{P}(S(t + \delta t) = s|S(t) = r)/\delta t.$$ -->
+
+<!-- These transition rates form a square matrix $\bf{Q}$ with elements $q_{rs}$. -->
+
+<!-- -- -->
+
+
+<!-- Here $q_{rr}=-\Sigma_{s{\neq}r}q_{rs}$ (i.e., the rows of **Q** sum to zero and $q_{rs}\geq0$ for $r{\neq}s$). -->
+
+<!-- -- -->
+
+<!-- We have $r, s = \{1,2\}$ where state $1=$ off-range (i.e., outside the area used by the Navy for military operations) and state $2=$ on-range: -->
+
+<!-- $$\begin{array}{ccc} -->
+<!--   \bf{Q} = -->
+<!--   \left [\begin{array}{cc} -->
+<!--     q_{1 1} & q_{1 2} \\ -->
+<!--       q_{2 1} & q_{2 2} -->
+<!--     \end{array}\right ] & \text{where} \: q_{r r} = -q_{r s}, & \text{for}\: r \neq s. -->
+<!--   \end{array}$$ -->
+
+
+<!-- --- -->
+
+<!-- ### Marine mammal exposure to Navy sonar -->
+<!-- #### Including exposure information -->
+
+
+<!-- We let  -->
+
+<!-- <br> -->
+
+<!-- $$\text{log}(q_{k, rs}(\mathbf{z}_k(t))) = (\beta_{0,rs} + u_{k, rs}) + \beta_{1,rs}\text{exp}(- \beta_{2,rs} \mathbf{z}_k(t)),$$ -->
+
+<!-- where -->
+
+
+<!-- $$\mathbf{z}_k(t)  \left\{ \begin{array}{rl} = 0 & \text{during exposure} \\ \geq 0 & \text{otherwise}\end{array} \right.$$ -->
+
+
+<!-- is the number of days since an individual was exposed to a sonar event and $\beta_{2,rs} \geq 0$ $\forall\: r \neq s$. -->
+
+
+
+<!-- --- -->
+
+<!-- ```{r echo = FALSE} -->
+<!-- library(xaringanExtra) -->
+<!-- xaringanExtra::use_panelset() -->
+<!-- ``` -->
+
+
+<!-- .panelset[ -->
+<!-- .panel[.panel-name[93232] -->
+<!-- .center[ -->
+<!-- <br> -->
+<!-- <br> -->
+<!-- ```{r, echo = FALSE,fig.height = 3,out.width = "80%"} -->
+<!-- knitr::include_graphics("img/whale1.png") -->
+<!-- ``` -->
+<!-- ] -->
+<!-- ] -->
+<!-- .panel[.panel-name[11164] -->
+<!-- .center[ -->
+<!-- <br> -->
+<!-- <br> -->
+<!-- ```{r, echo = FALSE,fig.height = 3,out.width = "80%"} -->
+<!-- knitr::include_graphics("img/whale2.png") -->
+<!-- ``` -->
+<!-- ] -->
+<!-- ] -->
+<!-- .panel[.panel-name[111670] -->
+<!-- .center[ -->
+<!-- <br> -->
+<!-- <br> -->
+<!-- ```{r, echo = FALSE,fig.height = 3,out.width = "80%"} -->
+<!-- knitr::include_graphics("img/whale3.png") -->
+<!-- ``` -->
+<!-- ] -->
+<!-- ] -->
+<!-- .panel[.panel-name[129715] -->
+<!-- .center[ -->
+<!-- <br> -->
+<!-- <br> -->
+<!-- ```{r, echo = FALSE,fig.height = 3,out.width = "80%"} -->
+<!-- knitr::include_graphics("img/whale4.png") -->
+<!-- ``` -->
+<!-- ] -->
+<!-- ] -->
+<!-- .panel[.panel-name[129719] -->
+<!-- .center[ -->
+<!-- <br> -->
+<!-- <br> -->
+<!-- ```{r, echo = FALSE,fig.height = 3,out.width = "80%"} -->
+<!-- knitr::include_graphics("img/whale5.png") -->
+<!-- ``` -->
+<!-- ] -->
+<!-- ] -->
+<!-- .panel[.panel-name[129720] -->
+<!-- .center[ -->
+<!-- <br> -->
+<!-- <br> -->
+<!-- ```{r, echo = FALSE,fig.height = 3,out.width = "80%"} -->
+<!-- knitr::include_graphics("img/whale6.png") -->
+<!-- ``` -->
+<!-- ] -->
+<!-- ] -->
+<!-- .panel[.panel-name[129721] -->
+<!-- .center[ -->
+<!-- <br> -->
+<!-- <br> -->
+<!-- ```{r, echo = FALSE,fig.height = 3,out.width = "80%"} -->
+<!-- knitr::include_graphics("img/whale7.png") -->
+<!-- ``` -->
+<!-- ] -->
+<!-- ] -->
+<!-- ] -->
+
