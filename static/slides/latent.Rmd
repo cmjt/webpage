@@ -242,7 +242,7 @@ $$\textrm{log}(l(\boldsymbol{\theta})) = \int_{t, \textbf{s}} \mu(\textbf{s}) + 
 ### Self-excitement
 
 ```{r echo=FALSE, out.width='70%'}
-knitr::include_graphics("img/selfe.png")
+knitr::include_graphics("img/hawkes_spat.png")
 ```
 
 ---
