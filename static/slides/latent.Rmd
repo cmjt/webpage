@@ -180,7 +180,7 @@ knitr::include_graphics("img/lgcp-fit.png")
 
 ### LGCP: the maths
 
-</br>
+<br>
 
 Intensity surface $\rightarrow$ $\{\Lambda(x): x \in {\rm I\!R}^{k+1}\}$ .small[for *k*D space and 1D time]
  <br>
@@ -188,7 +188,7 @@ Intensity surface $\rightarrow$ $\{\Lambda(x): x \in {\rm I\!R}^{k+1}\}$ .small[
  <br>
 
 Overall spatiotemporal intensity 
-$\mu = \int_{{\rm I\!R}^{k+1}}\Lambda(x)dx$ where $\Lambda(x) = \textrm{exp}(\bf{X}\beta + Z(x))$
+$\mu = \int_{{\rm I\!R^{k+1}}} \Lambda(x)dx$ where $\Lambda(x) = \textrm{exp}(\bf{X}\beta + Z(x))$
 <br>
  <br>
 
