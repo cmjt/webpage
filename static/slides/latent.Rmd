@@ -3,7 +3,7 @@ title: "Modelling systematic effects and latent phenomena in point referenced da
 subtitle: ""
 author: "Charlotte M. Jones-Todd <br> ![](img/twitter.svg)@cmjonestodd"
 institute: "![](img/uoa-logo.png){width=5%} University of Auckland"
-date: "![](img/slides.png){width=5%} [cmjt.github.io/slides/latent](https://cmjt.github.io/slides/latent)"
+date: "prelim. work with Xiangjie Xue"
 header-includes:
    - \usepackage{xcolor}
    - \usepackage{amsmath}
@@ -71,6 +71,19 @@ q <- quadratcount(pp,10,10)
 plot(q,add = TRUE,cex = 1.5)
 ```
 
+---
+### How low can you go?
+
+.center[
+```{r animation,  fig.show='animate', animation.hook='gifski'}
+cols <- RColorBrewer::brewer.pal(9, "Blues")
+s <- seq(5,50,5)
+for(i in 1:length(s)){
+  q <- quadratcount(pp,s[i],s[i])
+  image(q,axes = FALSE,col = cols)
+}
+```
+]
 
 ---
 ### But what about the unknown...
@@ -98,19 +111,6 @@ plot(q,add = TRUE,cex = 1.5)
 ```
 
 
----
-### How low can you go?
-
-.center[
-```{r animation,  fig.show='animate', animation.hook='gifski'}
-cols <- RColorBrewer::brewer.pal(9, "Blues")
-s <- seq(5,50,5)
-for(i in 1:length(s)){
-  q <- quadratcount(pp,s[i],s[i])
-  image(q,axes = FALSE,col = cols)
-}
-```
-]
 
 
 ---
@@ -170,6 +170,8 @@ box()
 
 ### `r emo::ji("knife")` Cutting up space 
 
+### INLA & TMB...
+
 ```{r echo=FALSE, out.height='100%'}
 knitr::include_graphics("img/lgcp-fit.png")
 ```
@@ -206,7 +208,7 @@ For Gaussian random field, $Z(x)$, with mean $\boldsymbol{\mu}$, variance-covari
 ---
 ### Self-excitement
 
-#### React with an emoji to vote
+#### `r fontawesome::fa("question-circle")` vote in Teams chat
 
 .center[
 <img src="img/niwa.png" width ="35%" />
@@ -276,13 +278,14 @@ system2("cowsay", args = "-f dragon 'Questions?'", stdout = TRUE)
 
 .pull-right[
 <br>
+.center[`r fontawesome::fa("question-circle")` leopard seal scat]
 <br>
 <br>
 .center[`r fontawesome::fa("twitter")` @cmjonestodd]
 <br>
 .center[`r fontawesome::fa("github")` @cmjt]
 <br>
-.center[<i class="fas fa-images"></i>  [cmjt.github.io/slides/latent](https://cmjt.github.io/slides/latent)]
+.center[`r fontawesome::fa("picture")` [cmjt.github.io/slides/latent](https://cmjt.github.io/slides/latent)]
 ]
 
 
