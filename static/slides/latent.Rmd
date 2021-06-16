@@ -206,6 +206,8 @@ For Gaussian random field, $Z(x)$, with mean $\boldsymbol{\mu}$, variance-covari
 ---
 ### Self-excitement
 
+#### React with an emoji to vote
+
 .center[
 <img src="img/niwa.png" width ="35%" />
 ]
@@ -237,6 +239,10 @@ $$\lambda(\textbf{s},t|H_t) = \mu(\textbf{s}) + \Sigma_{i:t_i<t}g(s - s_i,t - t_
 <br>
 
 $$\textrm{log}(l(\boldsymbol{\theta})) = \int_{t, \textbf{s}} \mu(\textbf{s}) + \sum_{i = 1}^n \textrm{log}(\lambda(s_i, t_i)) - \int_{t, \textbf{s}} \sum_{i: t_i < t} g(s - s_i, t - t_i)$$
+---
+### `r emo::ji("witch")` Sorting hats
+
+.center[![](https://cmjt.github.io/project/selfpp/featured_hua3418a03230c5d04b557dd56e4a5f8f4_30096_720x0_resize_lanczos_2.png)]
 
 ---
 ### Self-excitement
@@ -245,12 +251,12 @@ $$\textrm{log}(l(\boldsymbol{\theta})) = \int_{t, \textbf{s}} \mu(\textbf{s}) + 
 knitr::include_graphics("img/hawkes_spat.png")
 ```
 
+
 ---
-### `r emo::ji("witch")` Sorting hats
 
-.center[![](https://cmjt.github.io/project/selfpp/featured_hua3418a03230c5d04b557dd56e4a5f8f4_30096_720x0_resize_lanczos_2.png)]
-
-
+.center[
+<img src="img/model_checking.jpg" width="50%" />
+]
 ---
 
 ### Diolch am wrando 
@@ -272,9 +278,9 @@ system2("cowsay", args = "-f dragon 'Questions?'", stdout = TRUE)
 <br>
 <br>
 <br>
-.center[`r icon::fa("twitter")` @cmjonestodd]
+.center[`r fontawesome::fa("twitter")` @cmjonestodd]
 <br>
-.center[`r icon::fa("github")` @cmjt]
+.center[`r fontawesome::fa("github")` @cmjt]
 <br>
 .center[<i class="fas fa-images"></i>  [cmjt.github.io/slides/latent](https://cmjt.github.io/slides/latent)]
 ]
