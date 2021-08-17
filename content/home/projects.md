@@ -33,9 +33,6 @@ subtitle = ""
      name = "Masters projects"
      tag = "masters"
 
- [[content.filter_button]]
-     name = "Summer scholarship projects"
-     tag = "summer"
   
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.

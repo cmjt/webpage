@@ -4,7 +4,6 @@ summary: programming, point processes, simulation
 tags:
 - honours
 - masters
-- summer
 ---
 
 Events cluster in time and space: tweets go viral, flurries of nearby earthquakes occur in quick succession. Temporal and spatial proximity are major factors in the chain reaction of events. However, how and why these spatiotemporal clusters form is much more complex: the mechanisms that generate clusters of events are often self-exciting.
