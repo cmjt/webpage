@@ -151,7 +151,7 @@ A joint/mark model would then be given by
 $$\begin{array}{l}
     \text{log}(\Lambda(\boldsymbol{x})) = \text{X}\beta + Z(\boldsymbol{x}) \\ 
      g(m_1(\boldsymbol{x})) = \tilde{\text{X}\beta} + \gamma_1\: Z(\boldsymbol{x})  + G(\boldsymbol{x})\\
-      h(m_2(\boldsymbol{x})) = \tilde{\tilde{{\text{X}\beta}}} + \gamma_2\:Z(\boldsymbol{x}) + K(\boldsymbol{x}).\\
+      h(m_2(\boldsymbol{x})) = \tilde{{\text{X}^\prime\beta}} + \gamma_2\:Z(\boldsymbol{x}) + K(\boldsymbol{x}).\\
     \end{array}$$
 
 <br>
