@@ -7,6 +7,7 @@
 | Modelling point patterns | [https://cmjt.github.io/slides/points](https://cmjt.github.io/slides/points) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/points.Rmd) |
 | NZSA | [https://cmjt.github.io/slides/nzsa](https://cmjt.github.io/slides/nzsa) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/nzsa.Rmd) |
 | vNCSE | [https://cmjt.github.io/slides/latent](https://cmjt.github.io/slides/latent) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/latent.Rmd) |
+| AISC | [https://cmjt.github.io/slides/random](https://cmjt.github.io/slides/random) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/random.Rmd) |
 
 ## Website
 
