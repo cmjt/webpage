@@ -47,7 +47,7 @@ Intensity surface $\rightarrow$ $\{\Lambda(\boldsymbol{x}): x \in {\rm I\!R}^{2+
  <br>
 
 Overall spatiotemporal intensity 
-$\mu = \int_{{\rm I\!R^{2+1}}} \Lambda(\boldsymbol{x})dx$ where $$\Lambda(\boldsymbol{x}) = \textrm{exp}(\bf{X}\beta + Z(\boldsymbol{x}) + \eta(\boldsymbol{x})).$$
+$\mu = \int_{{\rm I\!R^{2+1}}} \Lambda(\boldsymbol{x})dx$ where $$\Lambda(\boldsymbol{x}) = \textrm{exp}(\text{X}\beta + Z(\boldsymbol{x}) + \eta(\boldsymbol{x})).$$
 <br>
  <br>
 
@@ -149,9 +149,9 @@ A joint/mark model would then be given by
 <br>
 
 $$\begin{array}{l}
-    \text{log}(\Lambda(\boldsymbol{x})) = \bf{X}\beta + Z(\boldsymbol{x}) \\ 
-     g(m_1(\boldsymbol{x})) = \tilde{\bf{X}\beta} + \gamma_1\: Z(\boldsymbol{x})  + G(\boldsymbol{x})\\
-      h(m_2(\boldsymbol{x})) = \tilde{\tilde{{\bf{X}\beta}}} + \gamma_2\:Z(\boldsymbol{x}) + K(\boldsymbol{x}).\\
+    \text{log}(\Lambda(\boldsymbol{x})) = \text{X}\beta + Z(\boldsymbol{x}) \\ 
+     g(m_1(\boldsymbol{x})) = \tilde{\text{X}\beta} + \gamma_1\: Z(\boldsymbol{x})  + G(\boldsymbol{x})\\
+      h(m_2(\boldsymbol{x})) = \tilde{\tilde{{\text{X}\beta}}} + \gamma_2\:Z(\boldsymbol{x}) + K(\boldsymbol{x}).\\
     \end{array}$$
 
 <br>
