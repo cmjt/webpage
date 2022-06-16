@@ -120,10 +120,10 @@ knitr::include_graphics("img/horse_mesh_example.png")
  <br>
 --
 
- - But surely we should have started with the why `r fontawesome::fa("question-circle")`
+ - But surely we should have started with the why `r fontawesome::fa("circle-question")`
  
 ---
-# `r fontawesome::fa("question-circle")` 
+# `r fontawesome::fa("circle-question")` 
 
 ```{r, echo=FALSE,  out.width="90%"}
 knitr::include_graphics("img/ufo.gif")
@@ -240,7 +240,7 @@ system2("cowsay", args = "-f dragon 'Questions?'", stdout = TRUE)
 
 .pull-right[
 <br>
-.center[`r fontawesome::fa("question-circle")` UFO sightings]
+.center[`r fontawesome::fa("circle-question")` UFO sightings]
 <br>
 .center[`r fontawesome::fa("twitter")` @cmjonestodd]
 <br>
