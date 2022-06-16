@@ -31,176 +31,269 @@ output:
 
 # `r fontawesome::fa(name = "list-check")` `stelfi`
 
-```{r, eval = FALSE}
-devtools::install_github("cmjt/stelfi")
-stelfi::compile_stelfi()
-```
+<br>
+<br>
+
+`TMB`: `R` package for fitting latent variable models
+  - Calculates first and second order derivatives of the likelihood function by AD (or any objective function written in `C++`)
+  - User specifies which function arguments the Laplace approximation should be applied to
+  
+<br>
+<br>
+
+`r fontawesome::fa("github")` [github.com/cmjt/stelfi](github.com/cmjt/stelfi)
+
+`devtools::install_github("cmjt/stelfi")`
+
+`stelfi::compile_stelfi()`
 
 
-`TMB` (Template Model Builder) is an `R` package for fitting statistical latent variable models. Models are formulated in `C++`. 
+      
+---
 
-`TMB` can calculate first and second order derivatives of the likelihood function by AD, or any objective function written in `C++`. The objective function (and its derivatives) can then be called from `R`. 
+# Ftting a spatial LGCP  
 
-The user can specify that the Laplace approximation should be applied to any subset of the function arguments. Yields marginal likelihood in latent variable model. Standard deviations of any parameter, or derived parameter, obtained by the delta method.
+
+ 
+$$\Lambda(\underline{s}) = \text{exp}(\beta_0 + G(\underline{s}) + \epsilon)$$
+
+  - $\beta_0$, intercept
+  - $G(\underline{s})$, Gaussian Markov Random Field (GMRF)
+  - $\epsilon$, error 
+
+$G(\underline{s})$ has a Matérn covariance defined by $\tau$ and $\kappa$, where  
+  - $r=\frac{\sqrt{8}}{\kappa}$ is the range, and 
+  - $\sigma=\frac{1}{\sqrt{4\pi\kappa^2\tau^2}}$ standard deviation
+
+--
+
+`fit <- fit_lgcp(locs, sp, smesh, parameters)`
+
+ - `locs`, matrix of locations
+ - `sp`, spatial domain
+ - `smesh`, a `INLA::inla.mesh.2d` object
+ - `parameters`, vector of parameter starting values
 
 ---
 
-# ETAS-type model `stelfi::fit_hawkes()`
+# vs. `inlabru`
 
-$$\lambda(t; m(t)) = \mu + \alpha \Sigma_{i:\tau_i<t}m(\tau_i)\text{exp}(-\beta * (t-\tau_i)) $$ 
-where $\mu$ is the background rate of the process and $m(t)$ is the temporal mark. Each event $i$ has an associated mark $\tau_i$ that multiples the self-exciting component of $\lambda$. 
-
-```{r, eval = FALSE, echo = c(1,6:8)}
-data("earthquakes", package = "stelfi")
-earthquakes <- earthquakes[order(earthquakes$origintime),]
-earthquakes <- earthquakes[!duplicated(earthquakes$origintime), ]
-times <- earthquakes$origintime
-earthquakes$times <- as.numeric(difftime(times, min(times), units = "mins"))
-fit <- fit_hawkes(times = earthquakes$times, 
-           parameters = c(mu = 3, alpha = 0.05, beta = 1), 
-           marks = earthquakes$magnitude)
-```
-
----
-
-# Model fit `stelfi::show_hawkes_GOF()`
-
-```{r, echo = FALSE, eval = FALSE,}
-pars <- get_coefs(fit)
-show_hawkes_GOF(times = earthquakes$times, mu = pars[1,1], alpha = pars[2,1], 
-                      beta = pars[3,1], return_values = FALSE, marks = earthquakes$magnitude)
-
-```
-
-
----
-
-# Inhomogeneous Hawkes process`stelfi::fit_hawkes_cbf()`
-
-$$\lambda(t) = \mu(t) + \alpha \Sigma_{i:\tau_i<t}\text{exp}(-\beta * (t-\tau_i)) $$ 
-The background $\mu(t)$ is time varying, rather than being constant. 
-
-```{r, eval = FALSE, echo = 17:20}
-times <- hawkesbow::hawkes(1000, fun = function(y) {1 + 0.1*sin(y)},
-M = 15, repr = 0.5, family = "exp", rate = 2)$p
- ## The background function must take a single parameter and
- ## the time(s) at which it is evaluated
- background <- function(params,times) {
- A = exp(params[[1]])
- B = stats::plogis(params[[2]]) * A
- return(A + B * sin(times))
- }
- ## The background_integral function must take a
- ## single parameter and the time at which it is evaluated
- background_integral <- function(params,x) {
-         A = exp(params[[1]])
-         B = stats::plogis(params[[2]]) * A
-         return((A*x)-B*cos(x))
- }
- param = list(alpha = 0.5, beta = 1.5)
- background_param = list(1,1)
- fit <- fit_hawkes_cbf(times = times, parameters = param, background = background,
-                       background_integral = background_integral, 
-                       background_parameters = background_param)
-
-```
-
----
-
-# Model fit `stelfi::show_hawkes()`
-
-```{r, eval = FALSE, echo = FALSE}
-show_hawkes(times = times, mu = background, alpha = fit$alpha, beta = fit$beta, 
-            background_param = fit$background_parameters)
-```
-
----
-
-# Ftting a spatial LGCP `stelfi::fit_lgcp()` 
-
-$$\Lambda(s) = \text{exp}(\beta_0 + G(s) + \epsilon)$$
-where $\beta_0$ is a constant, known as the intercept, $G(s)$ is a Gaussian Markov Random Field (GMRF) and $\epsilon$ an error term. 
-
-It is conventional to use Matérn covariance function to define the covariance of the random field. This takes two parameters $\tau$ and $\kappa$, commonly reported as $r=\frac{\sqrt{8}}{\kappa}$ and $\sigma=\frac{1}{\sqrt{4\pi\kappa^2\tau^2}}$, where $r$ is the range and $\sigma$ is the standard deviation.
-
-```{r, eval = FALSE}
+```{r, eval = TRUE, echo = FALSE, message=FALSE, warning=FALSE}
+require(stelfi)
+require(maptools)
 data(xyt, package = "stelfi")
 domain <- as(xyt$window, "SpatialPolygons")
 locs <- data.frame(x = xyt$x, y = xyt$y)
 smesh <- INLA::inla.mesh.2d(boundary = INLA::inla.sp2segment(domain), 
 max.edge = 0.75, cutoff = 0.3)
-fit <- fit_lgcp(locs = locs, sp = domain, smesh = smesh,
-parameters = c(beta = 0, log_tau = log(1), log_kappa = log(1)))
+fit <- fit_lgcp(locs = locs, sp = domain, smesh = smesh, parameters = c(beta = 0, log_tau = log(1), log_kappa = log(1)))
+require(inlabru)
+matern <- INLA::inla.spde2.matern(smesh)
+cmp <- coordinates ~ mySmooth(coordinates, model = matern) + Intercept(1)
+coordinates(locs) <- c("x", "y")
+fit_inla <- lgcp(cmp, locs, samplers = domain,
+                 domain = list(coordinates = smesh),
+                 options = list(control.inla = list(int.strategy = "eb")))
+```
+.pull-left[
+<br>
+<br>
+<br>
+
+```{r, eval = TRUE, echo = FALSE, results='asis'}
+df <- data.frame(inlabru = as.numeric(fit_inla$summary.fixed[,1:2]),
+                 stelfi = as.numeric(get_coefs(fit)[1, 1:2]))
+rownames(df) <- c("Intercept", "SE")
+knitr::kable(df, row.names = TRUE, digits = 3) %>%
+  kableExtra::kable_styling(latex_options = "striped")
+```
+]
+
+.pull-right[
+
+```{r, echo=FALSE, eval = TRUE, fig.align='center', warning=FALSE, message=FALSE, out.width="100%"}
+p1 <- plot_lambda(fit, smesh = smesh, border = domain) +
+    ggplot2::theme_void() + ggplot2::theme(legend.position = "none") + ggtitle("stelfi")
+require(ggplot2)
+require(patchwork)
+lambda <- predict(fit_inla, pixels(smesh), ~ exp(mySmooth + Intercept))
+p2 <- ggplot() +
+    gg(lambda) +
+    gg(domain) +
+    coord_fixed() +
+    scale_fill_viridis_c() +
+    theme_void() + theme(legend.position = "none") + ggtitle("inlabru")
+p2 / p1
+```
+]
+
+---
+
+# Ftting a spatiotemporal LGCP 
+
+<br>
+<br>
+
+
+$$\Lambda(\underline{s}, t) = \text{exp}(\beta_0 + G(\underline{s}, t) + \epsilon)$$
+ - $\beta_0$, intercept
+  - $G(\underline{s}, t)$, a spatiotemporal GMRF
+  - $\epsilon$, error 
+
+--
+
+`fit_lgcp(locs, sp, smesh, tmesh, parameters)`
+
+ - `locs`, matrix of locations
+ - `sp`, spatial domain
+ - `smesh`, a `INLA::inla.mesh.2d` object
+ - `tmesh`,  a `INLA::inla.mesh.1d` object
+ - `parameters`, vector of parameter starting values
+ 
+
+---
+
+# Fitting a marked LGCP
+
+$$\Lambda_{pp}(s) = \text{exp}(\beta_{pp} + G_{pp}(s) + \epsilon_{pp})$$
+$$\Lambda_{m_i}(s) = f^{-1}(\beta_{m_i} + G_{m_i}(s) + \alpha\; G_{pp}(s) + \epsilon_{m_i})$$
+
+
+ - $\alpha$ are coefficient(s) linking the point process and the mark(s). 
+
+ - $\Lambda_{m_i}(s)$ depends on the assumed distribution of the marks e.g.,
+    - if Poisson, intensity/rate 
+    - if binomial, probability of success (user must supply the number of trials) 
+    - if normal, the mean (user must supply the standard deviation)
+
+--
+
+`fit_mlgcp(locs, marks, sp,  smesh, parameters, methods, fields)`
+
+  - `marks`, matrix of marks at each location in `locs`
+  - `methods`, integer(s) choice of mark distribution(s)
+  - `fields`, binary vector, should a mark specific random field be included
+  
+---
+
+# `r fontawesome::fa("stopwatch")`
+
+```{r, echo = FALSE, eval = TRUE, out.height="70%", fig.align='center'}
+knitr::include_graphics("https://i.pinimg.com/originals/b5/4c/59/b54c59ca34b9bdbbd3c79a2da444dada.jpg")
 ```
 
 ---
 
-# Ftting a spatiotemporal LGCP `stelfi::fit_lgcp()` 
+# ETAS-type model
 
-$$\Lambda_i(s) = \text{exp}(\beta_0 + G_i(s) + \epsilon)$$
-where $i$ indexes the time knot. $\Lambda_i(s)$ is the field intensity at time knot $i$, and $G_i(s)$ the GMRF at the same time knot. Each $G_i(s)$ shares common values for $\tau$ and $\kappa$.
+<br>
+<br>
 
-```{r, eval = FALSE}
-ndays <- 2
-locs <- data.frame(x = xyt$x, y = xyt$y, t = xyt$t)
-w0 <- 2
-tmesh <- INLA::inla.mesh.1d(seq(0, ndays, by = w0))
-fit <- fit_lgcp(locs = locs, sp = domain, smesh = smesh, tmesh = tmesh,
- parameters = c(beta = 0, log_tau = log(1), log_kappa = log(1), atanh_rho = 0.2))
-```
 
+$$\lambda(t; m(t)) = \mu + \alpha \Sigma_{i:\tau_i<t}m(\tau_i)\text{exp}(-\beta * (t-\tau_i)) $$ 
+
+ - $\mu$, background rate
+ - $m(t)$, temporal mark
+ - $\Sigma_{i:\tau_i<t} \cdots$, historic dependence 
+ 
+--
+
+`fit_hawkes(times, parameters, marks)`
+
+ - `times`, vector of times
+ - `parameters`, starting values of parameters
+ - `marks`, (optional) vector of marks
+ 
 ---
 
-# Fitting a marked LGCP `stelfi::fit_mlgcp()`
+# `r fontawesome::fa("circle-question")` Which other ISEC talk `r fontawesome::fa("circle-question")`
 
-$$\Lambda_{pp}(s) = \text{exp}(\beta_{pp} + G_{pp}(s) + \epsilon)$$
-note the subscripts $pp$ indicating the point process. 
+$$\lambda_j(t; m(t)) = \mu + \alpha \Sigma_{i:\tau_i<t}m(\tau_i)\text{exp}(-\beta_j * (t-\tau_i))$$
 
-The mark(s) have their own field:
-$$\Lambda_m(s)=\beta_{m}+G_m(s)+\alpha   log(\Lambda_{pp}(s)) +\epsilon$$
-where $\alpha$ are coefficient(s) linking the point process and the mark(s). 
-The meaning of $\Lambda_m(s)$ depends on the distribution of the marks. If the marks are from a Poisson distribution, it is the intensity (as with the point process). If the marks are from a Binomial distribution, it is the success probability, and the user must supply the number of trials for each event. If the marks are normally distributed, $\Lambda_m(s)$ models the mean, and the user must supply the standard deviation.
-The user can choose for the point processes and the marks to share a common GMRF, i.e. $G_m(s) = G_{pp}(s)$
+$$\text{log}(\beta_j) \sim \text{Normal}(0, \sigma^2)$$
 
----
+--
 
-# Fitting a marked LGCP `stelfi::fit_mlgcp()`
+<br>
+<br>
 
-```{r, eval = FALSE}
-data(marked, package = "stelfi")
-loc.d <- 3 * cbind(c(0, 1, 1, 0, 0), c(0, 0, 1, 1, 0))
-domain <- sp::SpatialPolygons(list(sp::Polygons(list(sp::Polygon(loc.d)),'0')))
-smesh <- INLA::inla.mesh.2d(loc.domain = loc.d, offset = c(0.3, 1), 
-                           max.edge = c(0.3, 0.7), cutoff = 0.05)
-locs <- cbind(x = marked$x, y = marked$y)
-marks <- cbind(m1 = marked$m1) ## Gaussian
-parameters <- list(betamarks = matrix(0, nrow = 1, ncol = ncol(marks)) ,
-              log_tau = rep(log(1), 2), log_kappa = rep(log(1), 2),
-              marks_coefs_pp = rep(0, ncol(marks)), betapp = 0)
-fit <- fit_mlgcp(locs = locs, marks = marks,
-                 sp = domain, smesh = smesh,
-                 parameters = parameters, methods = 0,
-                 fields = 1)
+```{r, echo = FALSE, eval = TRUE, out.width="80%", fig.align='center'}
+knitr::include_graphics("./img/kaikoura.png")
 ```
 
 
 ---
-# Mesh quality `stelfi::meshmetrics()`
 
-![](https://raw.githubusercontent.com/cmjt/meshmetrics/master/README_files/figure-markdown_strict/triang_properties-1.png)
+# Inhomogeneous Hawkes process 
 
-The radius-edge ratio $= \frac{R}{l_\text{min}}$, where $R$ is the circumradius and $l_\text{min}$ is the length of the shortest edge. 
+<br>
+<br>
 
-The radius ratio $= \frac{r}{R}$ where $r$ is the inradius.
+$$\lambda(t) = \mu(t) + \alpha \Sigma_{i:\tau_i<t}\text{exp}(-\beta * (t-\tau_i)) $$ 
+
+- $\mu(t)$, varying background rate
+
+--
+
+`fit_hawkes_cbf(times, parameters, background, background_integral, background_param)`
+
+ - `background`, user supplied $\mu(t)$
+ - `background_integral`, integral of `background`
+ - `background_param`, starting values of parameters for $\mu(t)$
+ 
 ---
-# Mesh quality `stelfi::meshmetrics()`
+ 
+# `show_hawkes()`
 
-```{r, eval = FALSE}
+```{r, eval = TRUE, echo = FALSE}
+times <- unique(sort(as.numeric(difftime(retweets_niwa ,min(retweets_niwa),units = "mins"))))
+params <- c(mu = 9, alpha = 3, beta = 10)
+fit <- fit_hawkes(times = times,parameters = params) 
+pars <- get_coefs(fit)
+
+```
+
+```{r, eval = TRUE, echo = FALSE, fig.align='center', message = FALSE, warning = FALSE}
+show_hawkes(times = times, mu = pars[1,1], alpha = pars[2,1], beta = pars[3,1])
+```
+
+---
+ 
+# `show_hawkes_GOF()`
+
+```{r, eval = TRUE, echo = FALSE, fig.align='center', message = FALSE, warning = FALSE, results='hide'}
+show_hawkes_GOF(times = times, mu = pars[1,1], alpha = pars[2,1], beta = pars[3,1], return_values = FALSE)
+```
+
+---
+
+background-image: url("https://i.pinimg.com/736x/06/2e/73/062e7390f17068792d3547db6a2d2be9--be-patient-under-construction.jpg")
+
+
+---
+
+# Mesh quality `meshmetrics()`
+
+```{r, echo = FALSE, eval = TRUE, out.width="70%", fig.align='center'}
+knitr::include_graphics("https://raw.githubusercontent.com/cmjt/meshmetrics/master/README_files/figure-markdown_strict/triang_properties-1.png")
+```
+
+
+
+ - radius-edge ratio $= \frac{R}{l_\text{min}}$, where $R$ is the circumradius and $l_\text{min}$ is the length of the shortest edge
+ - radius ratio $= \frac{r}{R}$ where $r$ is the inradius.
+
+---
+
+# Mesh quality `meshmetrics()`
+
+```{r, eval = TRUE, echo = FALSE, message = FALSE, warning = FALSE, fig.align='center', out.width="60%"}
+require(INLA)
 data(horse_mesh, package = "stelfi")
 p1 <- plot_mesh(horse_mesh)
 p2 <- plot_mesh(horse_mesh, FALSE)
 require(patchwork)
-p1 + p2
+p1 / p2
 ```
 
 ---
@@ -210,10 +303,6 @@ p1 + p2
 ```{r, echo = FALSE, eval = TRUE, out.width="90%", fig.align='center'}
 knitr::include_graphics("img/hawkes_spat.png")
 ```
-
----
-
-# `r fontawesome::fa("circle-exclamation")`
 
 
 ---
@@ -235,11 +324,11 @@ system2("cowsay", args = "-f dragon 'Questions?'", stdout = TRUE)
 
 .pull-right[
 <br>
-.center[`r fontawesome::fa("circle-question")` whale clicks]
+.center[`r fontawesome::fa("circle-question")`: @TiagoMarques `r emo::ji("whale")` clicks]
 <br>
 .center[`r fontawesome::fa("twitter")` @cmjonestodd]
 <br>
-.center[`r fontawesome::fa("github")` @cmjt]
+.center[`r fontawesome::fa("github")` [github.com/cmjt/stelfi](github.com/cmjt/stelfi)]
 <br>
 .center[`r fontawesome::fa("image")` [cmjt.github.io/slides/stelfi](https://cmjt.github.io/slides/stelfi)]
 ]
