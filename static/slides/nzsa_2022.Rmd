@@ -157,7 +157,7 @@ Intensity surface $\rightarrow$ $\{\Lambda(x): x \in {\rm I\!R}^{k+1}\}$ .small[
  <br>
 
 Overall spatiotemporal intensity 
-$$\mu = \int_{{\rm I\!R^{k+1}}} \Lambda(x)dx$$ 
+$$\lambda(x) = \int_{{\rm I\!R^{k+1}}} \Lambda(x)dx$$ 
 where $$\Lambda(x) = \textrm{exp}(\bf{X}\beta + Z(x))$$ 
 
 for Gaussian random field, $Z(x)$, with mean $\boldsymbol{\mu}$, variance-covariance matrix $\boldsymbol{Q}^{-1}$
