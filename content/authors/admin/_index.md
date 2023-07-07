@@ -10,7 +10,7 @@ authors:
 superuser: true
 
 # Role/position
-role: Lecturer in Statistics
+role: Senior Lecturer in Statistics
 
 # Organizations/Affiliations
 organizations:
