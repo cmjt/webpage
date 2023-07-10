@@ -1,15 +1,3 @@
-## Talks
-
-| Talk       | Slides | Code |
-| ---------  | ------ | ---- |
-| #vISEC2020 | [https://cmjt.github.io/slides/visec2020](https://cmjt.github.io/slides/visec2020) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/visec2020.Rmd) |
-| RladiesAKL | [https://cmjt.github.io/slides/rladies](https://cmjt.github.io/slides/rladies) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/rladies.Rmd) |
-| Modelling point patterns | [https://cmjt.github.io/slides/points](https://cmjt.github.io/slides/points) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/points.Rmd) |
-| NZSA | [https://cmjt.github.io/slides/nzsa](https://cmjt.github.io/slides/nzsa) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/nzsa.Rmd) |
-| vNCSE | [https://cmjt.github.io/slides/latent](https://cmjt.github.io/slides/latent) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/latent.Rmd) |
-| AISC | [https://cmjt.github.io/slides/random](https://cmjt.github.io/slides/random) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/random.Rmd) |
-| ISEC2022 | [https://cmjt.github.io/slides/stelfi](https://cmjt.github.io/slides/stelfi) | [Rmarkdown file](https://github.com/cmjt/webpage/blob/master/static/slides/stelfi.Rmd) |
-
 ## Website
 
 Repository for my [personal webpage](https://cmjt.github.io), built using the `R` package `blogdown` and the [academic theme](https://sourcethemes.com/academic/)
