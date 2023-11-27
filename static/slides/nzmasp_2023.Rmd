@@ -99,6 +99,13 @@ background-size: fill
 ]
 
 ---
+class: inverse
+
+.center[
+## A brief foray back into the *real world*
+]
+
+---
 
 ## NIWA
 
@@ -129,7 +136,9 @@ background-size: fill
 
 ---
 
-## `r fontawesome::fa("question-circle")` Academia
+## `r fontawesome::fa("question-circle")` Back to academia
+
+
 
 .center[
 <img src="img/split.png"/>
@@ -245,6 +254,18 @@ knitr::include_graphics("img/run.png")
 .center[
 <img src="img/tag.jpg" alt="Blainville's beaked whale, tagged" height="400"/>
 .footnote[`r icon::fa_camera()` Charlotte Dunn]
+]
+
+
+---
+
+
+.pull-left[
+## The data
+<img src="img/autec.png" />
+]
+.pull-right[
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/AUTEC_Andros_Ranges_w_border.jpg" />
 ]
 
 
