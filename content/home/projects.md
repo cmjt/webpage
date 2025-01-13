@@ -26,12 +26,28 @@ subtitle = ""
     tag = "*"
 
   [[content.filter_button]]
-     name = "Honours projects"
-     tag = "honours"
+     name = "Two semester projects"
+     tag = "two"
 
   [[content.filter_button]]
-     name = "Masters projects"
-     tag = "masters"
+     name = "Single semester projects"
+     tag = "one"
+
+  [[content.filter_button]]
+     name = "Applied statistics"
+     tag = "applied"
+
+  [[content.filter_button]]
+     name = "Programming"
+     tag = "programming"
+
+  [[content.filter_button]]
+     name = "Statistics education"
+     tag = "education"
+
+  [[content.filter_button]]
+     name = "Statistical theory"
+     tag = "theory"
 
   
 [design]

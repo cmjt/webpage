@@ -18,7 +18,7 @@ description = ""
 sharing_image = "icon.png"
 
 # Twitter username (without @). Used when a vistor shares your site on Twitter.
-twitter = "cmjonestodd"
+# twitter = "cmjonestodd"
 
 # Diplay a logo in navigation bar rather than title (optional).
 #   To enable, place an image in `static/img/` and reference its filename below. To disable, set the value to "".
@@ -59,7 +59,7 @@ date_format = ""
 
 # Enter contact details (optional). To hide a field, clear it to "".
 email = "c.jonestodd@auckland.ac.nz"
-phone = "+64 9923 7688"
+phone = ""
 address = "Science Centre 303 Level 3, Room 318, 38 Princes Street, Auckland 1010"
 
 # Office hours: use `<br>` to insert a line break, or set to "" to remove office hours
